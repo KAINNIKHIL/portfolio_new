@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 import {
   FaGithub,
@@ -23,12 +24,12 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
-        alert("Message sent successfully!");
+        toast.success("Message sent successfully!");
         form.current.reset();
       })
       .catch((error) => {
         console.log(error);
-        alert("Failed to send message.");
+        toast.error("Failed to send message.");
       });
   };
 
