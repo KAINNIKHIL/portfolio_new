@@ -1,18 +1,6 @@
 # Portfolio Setup Guide
 
-## Environment Variables
-
-This portfolio currently does NOT require a `.env` file unless you add:
-
-* EmailJS
-* Appwrite
-* APIs
-* Analytics
-* Backend URLs
-
----
-
-# Recommended `.env` Setup (Future Ready)
+# `.env` Setup
 
 Create:
 
@@ -56,7 +44,7 @@ Inside `.gitignore`:
 .env
 ```
 
-Never push secret keys publicly.
+
 
 ---
 
