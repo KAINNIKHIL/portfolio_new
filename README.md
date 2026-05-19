@@ -1,18 +1,6 @@
 # Portfolio Setup Guide
 
-## Environment Variables
-
-This portfolio currently does NOT require a `.env` file unless you add:
-
-* EmailJS
-* Appwrite
-* APIs
-* Analytics
-* Backend URLs
-
----
-
-# Recommended `.env` Setup (Future Ready)
+# `.env` Setup
 
 Create:
 
@@ -56,7 +44,7 @@ Inside `.gitignore`:
 .env
 ```
 
-Never push secret keys publicly.
+
 
 ---
 
@@ -158,37 +146,8 @@ Nikhil Kaintura
 GitHub:
 [https://github.com/KAINNIKHIL](https://github.com/KAINNIKHIL)
 
-````
 
----
 
-# Recommended Future Environment Variables
 
-If you later add EmailJS:
 
-```env
-VITE_APP_EMAILJS_SERVICE_ID=
-VITE_APP_EMAILJS_TEMPLATE_ID=
-VITE_APP_EMAILJS_PUBLIC_KEY=
-````
 
-If you later add Appwrite:
-
-```env
-VITE_APPWRITE_URL=
-VITE_APPWRITE_PROJECT_ID=
-VITE_APPWRITE_DATABASE_ID=
-```
-
----
-
-# Current Recommendation
-
-Right now:
-
-* keep project frontend-only
-* deploy fast
-* avoid unnecessary backend complexity
-* focus on polish + responsiveness + projects
-
-That is the correct strategy for a fresher frontend/full-stack portfolio.
