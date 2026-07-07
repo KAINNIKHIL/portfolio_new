@@ -16,6 +16,8 @@ import {
   SiMongodb,
   SiMysql,
   SiAppwrite,
+  SiPostgresql,
+  SiNextdotjs,
 } from "react-icons/si";
 
 const skillGroups = [
@@ -26,6 +28,7 @@ const skillGroups = [
       { name: "CSS3", icon: <FaCss3Alt /> },
       { name: "JavaScript", icon: <SiJavascript /> },
       { name: "React", icon: <FaReact /> },
+      { name: "Next.js", icon: <SiNextdotjs /> },
       { name: "Tailwind", icon: <SiTailwindcss /> },
     ],
   },
@@ -43,6 +46,7 @@ const skillGroups = [
     title: "Database & Tools",
     skills: [
       { name: "MongoDB", icon: <SiMongodb /> },
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
       { name: "MySQL", icon: <SiMysql /> },
       { name: "Git", icon: <FaGitAlt /> },
       { name: "GitHub", icon: <FaGithub /> },
