@@ -1,5 +1,6 @@
 import vibesoul from "../assets/vibesoul.png";
 import shopease from "../assets/shopease.jpg";
+import rewiredcv from "../assets/rewiredcv.png";
 
 const projects = [
   {
@@ -43,6 +44,26 @@ const projects = [
     live:
       "https://shoopease.vercel.app/",
   },
+  {
+  title: "RewiredCV",
+  description:
+    "An AI-powered resume reviewer that analyzes resumes, provides ATS-friendly feedback, identifies improvement areas, and helps users optimize their resumes for job applications.",
+
+  image: rewiredcv,
+
+  tech: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "GeminiAI API",
+  ],
+
+  github:
+    "https://github.com/KAINNIKHIL/ai-resume-reviewer",
+
+  live:
+    "https://rewiredcv.vercel.app",
+}
 ];
 
 export default projects;
