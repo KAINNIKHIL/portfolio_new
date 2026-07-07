@@ -1,5 +1,5 @@
 import vibesoul from "../assets/vibesoul.png";
-import shopease from "../assets/shopease.jpg";
+import shopease from "../assets/shopease.png";
 import rewiredcv from "../assets/rewiredcv.png";
 
 const projects = [
