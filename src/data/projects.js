@@ -18,7 +18,7 @@ const projects = [
     ],
 
     github:
-      "https://github.com/KAINNIKHIL/vibesoul_code",
+      "https://github.com/KAINNIKHIL/VibeSoul",
 
     live:
       "https://vibesoul.vercel.app",
@@ -42,7 +42,7 @@ const projects = [
       "https://github.com/KAINNIKHIL/shopease",
 
     live:
-      "https://shoopease.vercel.app/",
+      "https://shoopease.vercel.app/login",
   },
   {
   title: "RewiredCV",
