@@ -4,30 +4,6 @@ import rewiredcv from "../assets/rewiredcv.png";
 
 const projects = [
   {
-<<<<<<< HEAD
-=======
-    title: "VibeSoul",
-    description:
-      "An MBTI-based social media platform with posts, stories, comments, likes, follows, and real-time interactions built using React and Appwrite.",
-
-    image: vibesoul,
-
-    tech: [
-      "React",
-      "Appwrite",
-      "Tailwind",
-      "JavaScript",
-    ],
-
-    github:
-      "https://github.com/KAINNIKHIL/VibeSoul",
-
-    live:
-      "https://vibesoul.vercel.app",
-  },
-
-  {
->>>>>>> c7f70bf4b8e07295c5f8d3cb42fd299a2ab889e2
     title: "ShopEase",
     description:
       "A full-stack e-commerce application with user authentication, product management, shopping cart functionality, and a responsive interface. Built with React, Node.js, Express, and PostgreSQL.",
