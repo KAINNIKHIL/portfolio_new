@@ -1,252 +1,273 @@
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FiArrowUpRight, FiSend, FiMessageCircle } from "react-icons/fi";
 
-import {
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-} from "react-icons/fa";
+const socialLinks = [
+  {
+    label: "GitHub",
+    detail: "Explore my projects",
+    href: "https://github.com/KAINNIKHIL",
+    icon: FaGithub,
+  },
+  {
+    label: "LinkedIn",
+    detail: "Let's connect professionally",
+    href: "https://www.linkedin.com/in/nikhil-singh-kaintura",
+    icon: FaLinkedin,
+  },
+];
+
+const inputClasses =
+  "w-full rounded-xl border border-slate-700/80 bg-[#071426] px-5 py-4 text-white placeholder:text-slate-500 outline-none transition duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/10";
 
 const Contact = () => {
+  const form = useRef(null);
+  const [isSending, setIsSending] = useState(false);
 
-  const form = useRef();
-
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        form.current,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(() => {
-        toast.success("Message sent successfully!");
-        form.current.reset();
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Failed to send message.");
-      });
+    if (isSending || !form.current) return;
+
+    const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("Missing EmailJS environment variables.");
+      toast.error("Contact service is temporarily unavailable.");
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, form.current, publicKey);
+      toast.success("Message sent successfully!");
+      form.current.reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <section
       id="contact"
-      className="py-24 px-6 md:px-10 bg-slate-900 overflow-hidden"
+      className="relative isolate overflow-hidden bg-[#020B18] px-6 py-24 text-white md:px-10 md:py-28"
     >
-      <div className="max-w-6xl mx-auto">
+      {/* Background effects */}
+      <div className="pointer-events-none absolute -left-40 top-20 -z-10 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 -z-10 h-96 w-96 rounded-full bg-blue-600/10 blur-[130px]" />
 
-        {/* Heading */}
+      <div className="mx-auto max-w-6xl">
+        {/* Section heading */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-16 text-center"
         >
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.07] px-4 py-2 text-sm font-medium tracking-wide text-cyan-300">
+            <span className="h-2 w-2 rounded-full bg-cyan-400" />
+            CONTACT
+          </span>
 
-          <p className="text-cyan-400 text-lg mb-3">
-            Contact
-          </p>
-
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Let’s Work Together
+          <h2 className="mb-5 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            Let's Build Something <span className="text-cyan-400">Great.</span>
           </h2>
 
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Have a project idea, internship opportunity,
-            or collaboration in mind? Feel free to reach out.
+          <p className="mx-auto max-w-2xl text-base leading-8 text-slate-400 md:text-lg">
+            Have a project idea, internship opportunity, or collaboration in
+            mind? I'd love to hear from you.
           </p>
-
         </motion.div>
 
-        {/* Contact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          {/* Left Side */}
+        {/* Contact grid */}
+        <div className="grid grid-cols-1 gap-7 md:grid-cols-2 md:gap-8">
+          {/* Contact information */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-            className="
-              bg-slate-950
-              border border-slate-800
-              rounded-3xl
-              p-8
-              hover:border-cyan-400
-              transition-all
-              duration-300
-            "
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15 }}
+            className="group relative overflow-hidden rounded-3xl border border-slate-800/80 bg-[#061224]/90 p-7 transition duration-300 hover:border-cyan-400/40 sm:p-9"
           >
+            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-cyan-400/[0.05] blur-2xl transition duration-500 group-hover:bg-cyan-400/10" />
 
-            <h3 className="text-2xl font-bold mb-8">
-              Contact Information
-            </h3>
+            <div className="relative">
+              <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-2xl text-cyan-300">
+                <FiMessageCircle />
+              </div>
 
-            <div className="space-y-6">
+              <p className="mb-2 text-sm font-medium uppercase tracking-[0.18em] text-cyan-400">
+                Get in touch
+              </p>
 
-              {/* Email */}
+              <h3 className="mb-3 text-2xl font-bold sm:text-3xl">
+                Contact Information
+              </h3>
+
+              <p className="mb-9 leading-7 text-slate-400">
+                Open to discussing web development, interesting projects, and
+                opportunities to grow as a developer.
+              </p>
+
+              {/* Email link */}
               <a
                 href="mailto:nikhilsinghkaintura@gmail.com"
-                className="
-                  flex items-start gap-4
-                  text-gray-300
-                  hover:text-cyan-400
-                  transition duration-300
-                  break-all
-                "
+                className="group/email mb-8 flex items-start gap-4 rounded-2xl border border-slate-800 bg-[#020B18]/70 p-4 transition duration-300 hover:border-cyan-400/40"
               >
-                <FaEnvelope className="text-2xl shrink-0 mt-1" />
-
-                <span>
-                  nikhilsinghkaintura@gmail.com
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-400/10 text-xl text-cyan-300">
+                  <FaEnvelope />
                 </span>
+
+                <span className="min-w-0 flex-1">
+                  <span className="mb-1 block text-sm text-slate-500">
+                    Email me at
+                  </span>
+                  <span className="break-all text-sm font-medium text-slate-200 transition group-hover/email:text-cyan-300 sm:text-base">
+                    nikhilsinghkaintura@gmail.com
+                  </span>
+                </span>
+
+                <FiArrowUpRight className="mt-1 shrink-0 text-lg text-slate-500 transition group-hover/email:-translate-y-1 group-hover/email:translate-x-1 group-hover/email:text-cyan-300" />
               </a>
 
-              {/* GitHub */}
-              <a
-                href="https://github.com/KAINNIKHIL"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex items-start gap-4
-                  text-gray-300
-                  hover:text-cyan-400
-                  transition duration-300
-                  break-all
-                "
-              >
-                <FaGithub className="text-2xl shrink-0 mt-1" />
+              {/* Social links */}
+              <div className="space-y-3">
+                {socialLinks.map(({ label, detail, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/social flex items-center gap-4 rounded-2xl border border-transparent p-3 transition duration-300 hover:border-slate-700 hover:bg-slate-900/60"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-800/80 text-xl text-slate-300 transition group-hover/social:bg-cyan-400/10 group-hover/social:text-cyan-300">
+                      <Icon />
+                    </span>
 
-                <span>
-                  GitHub
-                </span>
-              </a>
+                    <span className="flex-1">
+                      <span className="block font-semibold text-slate-200">
+                        {label}
+                      </span>
+                      <span className="mt-1 block text-sm text-slate-500">
+                        {detail}
+                      </span>
+                    </span>
 
-              {/* LinkedIn */}
-              <a
-                href="https://www.linkedin.com/in/nikhil-singh-kaintura"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex items-start gap-4
-                  text-gray-300
-                  hover:text-cyan-400
-                  transition duration-300
-                  break-all
-                "
-              >
-                <FaLinkedin className="text-2xl shrink-0 mt-1" />
+                    <FiArrowUpRight className="text-lg text-slate-500 transition group-hover/social:-translate-y-1 group-hover/social:translate-x-1 group-hover/social:text-cyan-300" />
+                  </a>
+                ))}
+              </div>
 
-                <span>
-                  LinkedIn
-                </span>
-              </a>
-
+              <div className="mt-8 border-t border-slate-800 pt-6">
+                <p className="text-sm leading-6 text-slate-500">
+                  Prefer email? Send me a message using the form and I'll get
+                  back to you.
+                </p>
+              </div>
             </div>
-
           </motion.div>
 
-          {/* Right Side */}
+          {/* Contact form */}
           <motion.form
             ref={form}
             onSubmit={sendEmail}
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-            className="
-              bg-slate-950
-              border border-slate-800
-              rounded-3xl
-              p-8
-              space-y-6
-              hover:border-cyan-400
-              transition-all
-              duration-300
-            "
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15 }}
+            className="rounded-3xl border border-slate-800/80 bg-[#061224]/90 p-7 transition duration-300 hover:border-cyan-400/30 sm:p-9"
           >
+            <div className="mb-8">
+              <h3 className="mb-2 text-2xl font-bold">Send Me a Message</h3>
+              <p className="text-sm leading-6 text-slate-400">
+                Fill out the form below. Your message will be sent directly to
+                my inbox.
+              </p>
+            </div>
 
-            {/* Name */}
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-              className="
-                w-full
-                bg-slate-900
-                border border-slate-700
-                rounded-xl
-                px-5 py-4
-                outline-none
-                focus:border-cyan-400
-                transition duration-300
-              "
-            />
+            <div className="space-y-5">
+              <div>
+                <label
+                  htmlFor="contact-name"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Your Name
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  autoComplete="name"
+                  required
+                  maxLength={100}
+                  className={inputClasses}
+                />
+              </div>
 
-            {/* Email */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-              className="
-                w-full
-                bg-slate-900
-                border border-slate-700
-                rounded-xl
-                px-5 py-4
-                outline-none
-                focus:border-cyan-400
-                transition duration-300
-              "
-            />
+              <div>
+                <label
+                  htmlFor="contact-email"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Your Email
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                  maxLength={254}
+                  className={inputClasses}
+                />
+              </div>
 
-            {/* Message */}
-            <textarea
-              rows="6"
-              name="message"
-              placeholder="Your Message"
-              required
-              className="
-                w-full
-                bg-slate-900
-                border border-slate-700
-                rounded-xl
-                px-5 py-4
-                outline-none
-                resize-none
-                focus:border-cyan-400
-                transition duration-300
-              "
-            ></textarea>
+              <div>
+                <label
+                  htmlFor="contact-message"
+                  className="mb-2 block text-sm font-medium text-slate-300"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  rows={5}
+                  name="message"
+                  placeholder="Tell me about your idea or opportunity..."
+                  required
+                  maxLength={5000}
+                  className={`${inputClasses} resize-y`}
+                />
+              </div>
 
-            {/* Button */}
-            <button
-              type="submit"
-              className="
-                w-full
-                py-4
-                rounded-xl
-                bg-cyan-400
-                text-slate-900
-                font-semibold
-                hover:scale-[1.02]
-                transition
-                duration-300
-              "
-            >
-              Send Message
-            </button>
+              <button
+                type="submit"
+                disabled={isSending}
+                className="group flex w-full items-center justify-center gap-3 rounded-xl bg-cyan-400 px-6 py-4 font-semibold text-[#020B18] transition duration-300 hover:bg-cyan-300 hover:shadow-[0_0_30px_rgba(34,211,238,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSending ? "Sending..." : "Send Message"}
+                {!isSending && (
+                  <FiSend className="text-lg transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                )}
+              </button>
 
+              <p className="text-center text-xs leading-5 text-slate-500">
+                Your details are used to respond to your message.
+              </p>
+            </div>
           </motion.form>
-
         </div>
       </div>
     </section>
